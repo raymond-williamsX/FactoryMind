@@ -23,6 +23,7 @@
     "noFallthroughCasesInSwitch": true,
 
     /* Path Aliasing */
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
