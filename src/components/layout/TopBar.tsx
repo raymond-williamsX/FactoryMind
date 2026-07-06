@@ -9,7 +9,6 @@ export default function TopBar() {
   const { isCollapsed, toggleSidebar } = useSidebar();
   const location = useLocation();
 
-  // Simple breadcrumbs mapping based on paths
   const getBreadcrumbs = () => {
     const path = location.pathname;
     if (path === "/dashboard") return ["Platform", "Overview"];
@@ -22,30 +21,30 @@ export default function TopBar() {
   const breadcrumbs = getBreadcrumbs();
 
   return (
-    <header className="h-16 border-b border-border bg-card text-card-foreground flex items-center justify-between px-6 sticky top-0 z-20 select-none">
-      {/* Left: Hamburger + Breadcrumbs */}
-      <div className="flex items-center gap-4">
+    <header className="h-14 border-b border-border bg-card text-card-foreground flex items-center justify-between px-4 sticky top-0 z-20 select-none">
+      {/* Left Side: Hamburger & Breadcrumbs */}
+      <div className="flex items-center gap-3">
         <button
           onClick={toggleSidebar}
-          className="p-1.5 rounded-lg hover:bg-muted text-muted-foreground transition-colors lg:hidden"
+          className="p-1 rounded-sm hover:bg-muted text-muted-foreground transition-colors lg:hidden border border-transparent hover:border-border"
         >
-          <Menu className="h-5 w-5" />
+          <Menu className="h-4.5 w-4.5" />
         </button>
 
         {isCollapsed && (
           <button
             onClick={toggleSidebar}
-            className="p-1.5 rounded-lg hover:bg-muted text-muted-foreground transition-colors hidden lg:block"
+            className="p-1 rounded-sm hover:bg-muted text-muted-foreground transition-colors hidden lg:block border border-transparent hover:border-border"
           >
-            <Menu className="h-5 w-5" />
+            <Menu className="h-4.5 w-4.5" />
           </button>
         )}
 
-        <div className="flex items-center gap-2 text-sm text-muted-foreground font-medium">
+        <div className="flex items-center gap-2 text-xs text-muted-foreground font-semibold uppercase tracking-wider">
           {breadcrumbs.map((crumb, idx) => (
-            <div key={crumb} className="flex items-center gap-2">
-              {idx > 0 && <span className="text-muted-foreground/45">/</span>}
-              <span className={cn(idx === breadcrumbs.length - 1 && "text-foreground font-semibold")}>
+            <div key={crumb} className="flex items-center gap-1.5">
+              {idx > 0 && <span className="text-muted-foreground/35">/</span>}
+              <span className={cn(idx === breadcrumbs.length - 1 && "text-foreground")}>
                 {crumb}
               </span>
             </div>
@@ -53,60 +52,60 @@ export default function TopBar() {
         </div>
       </div>
 
-      {/* Middle: Live Plant Telemetry Status (industrial touch) */}
-      <div className="hidden md:flex items-center gap-6 text-xs border-x border-border/80 px-6 py-1 mx-4">
-        <div className="flex items-center gap-2">
-          <CheckCircle className="h-4 w-4 text-emerald-500 shrink-0" />
+      {/* Middle: Clinical OEE Badging */}
+      <div className="hidden md:flex items-center gap-4 text-[10px] uppercase font-semibold border-x border-border/80 px-4 h-6">
+        <div className="flex items-center gap-1.5">
+          <CheckCircle className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
           <div>
-            <span className="text-muted-foreground">Dangote Obajana:</span>{" "}
-            <span className="font-semibold text-foreground">94.2% OEE</span>
+            <span className="text-muted-foreground">Obajana Kilns:</span>{" "}
+            <span className="text-foreground font-bold">94.2% OEE</span>
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <CheckCircle className="h-4 w-4 text-emerald-500 shrink-0" />
+        <div className="flex items-center gap-1.5">
+          <CheckCircle className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
           <div>
-            <span className="text-muted-foreground">Dangote Ibese:</span>{" "}
-            <span className="font-semibold text-foreground">91.8% OEE</span>
+            <span className="text-muted-foreground">Ibese Kilns:</span>{" "}
+            <span className="text-foreground font-bold">91.8% OEE</span>
           </div>
         </div>
       </div>
 
-      {/* Right: Search, Alarm Center, Theme Toggle, User Profiling */}
-      <div className="flex items-center gap-3">
+      {/* Right Side: Search, Theme, Profile */}
+      <div className="flex items-center gap-2">
         {/* Search */}
-        <div className="relative hidden xl:block w-64">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+        <div className="relative hidden xl:block w-48">
+          <Search className="absolute left-2 top-2 h-3 w-3 text-muted-foreground" />
           <input
             type="text"
-            placeholder="Search assets, telemetry, logs..."
+            placeholder="Search register tags..."
             disabled
-            className="w-full bg-muted/65 border border-border rounded-lg pl-9 pr-4 py-1.5 text-xs text-muted-foreground focus:outline-none cursor-not-allowed"
+            className="w-full bg-muted/50 border border-border rounded-sm pl-7 pr-3 py-1 text-[11px] text-muted-foreground focus:outline-none cursor-not-allowed"
           />
         </div>
 
-        {/* Alarm Bell Button */}
-        <button className="p-2 rounded-lg hover:bg-muted text-muted-foreground transition-all relative">
+        {/* Alarm Bell */}
+        <button className="p-1.5 rounded-sm hover:bg-muted text-muted-foreground transition-all relative border border-transparent hover:border-border">
           <Bell className="h-4 w-4" />
-          <span className="absolute top-1.5 right-1.5 h-1.5 w-1.5 rounded-full bg-destructive" />
+          <span className="absolute top-1 right-1 h-1.5 w-1.5 rounded-full bg-destructive" />
         </button>
 
-        {/* Theme Toggle */}
+        {/* Theme Switch */}
         <button
           onClick={toggleTheme}
-          className="p-2 rounded-lg hover:bg-muted text-muted-foreground transition-all"
+          className="p-1.5 rounded-sm hover:bg-muted text-muted-foreground transition-all border border-transparent hover:border-border"
           aria-label="Toggle Theme"
         >
           {theme === "light" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
         </button>
 
-        {/* User profile dropdown trigger placeholder */}
-        <div className="flex items-center gap-2 border-l border-border pl-3 ml-1">
-          <div className="h-8 w-8 rounded-lg bg-primary/10 border border-primary/20 text-primary flex items-center justify-center font-bold text-xs shrink-0 dark:bg-primary/20 dark:text-primary-foreground">
-            <User className="h-4 w-4" />
+        {/* User profile */}
+        <div className="flex items-center gap-2 border-l border-border pl-3 ml-1 h-6">
+          <div className="h-6 w-6 rounded-sm bg-primary/10 border border-primary/20 text-primary flex items-center justify-center font-bold text-[10px] shrink-0 dark:bg-primary/20">
+            <User className="h-3.5 w-3.5" />
           </div>
           <div className="hidden lg:flex flex-col text-left">
-            <span className="text-xs font-semibold leading-none">Dangote Operator</span>
-            <span className="text-[10px] text-muted-foreground leading-none mt-1">Control Room 4A</span>
+            <span className="text-[10px] font-bold uppercase leading-none text-foreground">Operator</span>
+            <span className="text-[9px] text-muted-foreground leading-none mt-1">Control Room A</span>
           </div>
         </div>
       </div>

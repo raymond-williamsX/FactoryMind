@@ -47,107 +47,107 @@ export default function DashboardShell() {
   );
 
   return (
-    <div className="p-6 max-w-[1600px] mx-auto space-y-6">
+    <div className="p-4 max-w-[1600px] mx-auto space-y-4">
       {/* Title Header */}
-      <div className="flex flex-col gap-1">
-        <h1 className="text-2xl font-bold tracking-tight text-foreground">
+      <div className="flex flex-col gap-0.5 border-b border-border pb-3">
+        <h1 className="text-lg font-bold tracking-tight text-foreground uppercase">
           Dangote Cement Group — Enterprise Plant Performance
         </h1>
-        <p className="text-sm text-muted-foreground">
-          Real-time OEE, sensor telematics, and active clinker kiln indicators.
+        <p className="text-xs text-muted-foreground">
+          Real-time OEE metrics, raw feed telemetry, and clinker kiln diagnostics.
         </p>
       </div>
 
-      {/* KPI Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* KPI 1 */}
-        <div className="bg-card border border-border p-5 rounded-xl flex items-center justify-between shadow-sm relative overflow-hidden group">
+      {/* KPI Tiles Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        {/* KPI 1: OEE */}
+        <div className="bg-card border border-border border-l-4 border-l-primary p-4 rounded-sm flex items-center justify-between">
           <div className="space-y-1">
-            <span className="text-xs font-medium text-muted-foreground">Average Group OEE</span>
+            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wide">Average Group OEE</span>
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-bold font-mono">91.0%</span>
-              <span className="text-[10px] bg-emerald-500/10 text-emerald-500 dark:bg-emerald-500/20 px-1.5 py-0.5 rounded-full font-medium flex items-center gap-0.5">
+              <span className="text-xl font-bold font-mono text-foreground">91.0%</span>
+              <span className="text-[9px] text-emerald-600 font-semibold flex items-center gap-0.5">
                 <TrendingUp className="h-2.5 w-2.5" /> +1.2%
               </span>
             </div>
           </div>
-          <div className="bg-primary/5 text-primary p-3 rounded-lg group-hover:scale-105 transition-transform">
-            <Activity className="h-5 w-5" />
+          <div className="text-muted-foreground p-1">
+            <Activity className="h-4.5 w-4.5" />
           </div>
         </div>
 
-        {/* KPI 2 */}
-        <div className="bg-card border border-border p-5 rounded-xl flex items-center justify-between shadow-sm relative overflow-hidden group">
+        {/* KPI 2: Output */}
+        <div className="bg-card border border-border border-l-4 border-l-sky-600 p-4 rounded-sm flex items-center justify-between">
           <div className="space-y-1">
-            <span className="text-xs font-medium text-muted-foreground">Total Output (Daily)</span>
+            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wide">Total Output (Daily)</span>
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-bold font-mono">14,270t</span>
-              <span className="text-[10px] bg-emerald-500/10 text-emerald-500 dark:bg-emerald-500/20 px-1.5 py-0.5 rounded-full font-medium flex items-center gap-0.5">
+              <span className="text-xl font-bold font-mono text-foreground">14,270t</span>
+              <span className="text-[9px] text-emerald-600 font-semibold flex items-center gap-0.5">
                 <TrendingUp className="h-2.5 w-2.5" /> +4.8%
               </span>
             </div>
           </div>
-          <div className="bg-primary/5 text-primary p-3 rounded-lg group-hover:scale-105 transition-transform">
-            <Building2 className="h-5 w-5" />
+          <div className="text-muted-foreground p-1">
+            <Building2 className="h-4.5 w-4.5" />
           </div>
         </div>
 
-        {/* KPI 3 */}
-        <div className="bg-card border border-border p-5 rounded-xl flex items-center justify-between shadow-sm relative overflow-hidden group">
+        {/* KPI 3: Alarms */}
+        <div className="bg-card border border-border border-l-4 border-l-destructive p-4 rounded-sm flex items-center justify-between">
           <div className="space-y-1">
-            <span className="text-xs font-medium text-muted-foreground">Active Telemetry Alarms</span>
+            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wide">Active Telemetry Alarms</span>
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-bold font-mono">2 Warnings</span>
-              <span className="text-[10px] bg-amber-500/10 text-amber-500 dark:bg-amber-500/20 px-1.5 py-0.5 rounded-full font-medium">
+              <span className="text-xl font-bold font-mono text-destructive">2 Warnings</span>
+              <span className="text-[9px] text-muted-foreground font-semibold">
                 1 Resolved
               </span>
             </div>
           </div>
-          <div className="bg-amber-500/10 text-amber-500 p-3 rounded-lg group-hover:scale-105 transition-transform">
-            <AlertTriangle className="h-5 w-5" />
+          <div className="text-destructive p-1">
+            <AlertTriangle className="h-4.5 w-4.5" />
           </div>
         </div>
 
-        {/* KPI 4 */}
-        <div className="bg-card border border-border p-5 rounded-xl flex items-center justify-between shadow-sm relative overflow-hidden group">
+        {/* KPI 4: Energy */}
+        <div className="bg-card border border-border border-l-4 border-l-emerald-600 p-4 rounded-sm flex items-center justify-between">
           <div className="space-y-1">
-            <span className="text-xs font-medium text-muted-foreground">Total Group Load</span>
+            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wide">Total Group Load</span>
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-bold font-mono">42.8 MW</span>
-              <span className="text-[10px] bg-emerald-500/10 text-emerald-500 dark:bg-emerald-500/20 px-1.5 py-0.5 rounded-full font-medium">
+              <span className="text-xl font-bold font-mono text-foreground">42.8 MW</span>
+              <span className="text-[9px] text-emerald-600 font-semibold">
                 Optimal
               </span>
             </div>
           </div>
-          <div className="bg-primary/5 text-primary p-3 rounded-lg group-hover:scale-105 transition-transform">
-            <Zap className="h-5 w-5" />
+          <div className="text-muted-foreground p-1">
+            <Zap className="h-4.5 w-4.5" />
           </div>
         </div>
       </div>
 
-      {/* Main Content Split Area */}
-      <div className="flex flex-col lg:flex-row gap-6 items-start">
+      {/* Grid Content Split Area */}
+      <div className="flex flex-col lg:flex-row gap-4 items-start">
         
-        {/* Primary Data Table */}
+        {/* Primary Data Grid */}
         <div className={cn(
-          "bg-card border border-border rounded-xl shadow-sm overflow-hidden transition-all duration-300 w-full",
+          "bg-card border border-border rounded-sm overflow-hidden transition-all duration-150 w-full",
           selectedLine ? "lg:w-2/3" : "w-full"
         )}>
           {/* Table Toolbar */}
-          <div className="p-4 border-b border-border flex flex-col sm:flex-row justify-between gap-3 bg-muted/20">
+          <div className="p-3 border-b border-border flex flex-col sm:flex-row justify-between gap-3 bg-muted/20">
             <input
               type="text"
-              placeholder="Filter by line name or location..."
+              placeholder="Search assets..."
               value={searchFilter}
               onChange={(e) => setSearchFilter(e.target.value)}
-              className="bg-background border border-border rounded-lg px-3 py-1.5 text-sm w-full sm:w-64 focus:outline-none focus:ring-1 focus:ring-primary"
+              className="bg-background border border-border rounded-sm px-3 py-1 text-xs w-full sm:w-64 focus:outline-none focus:ring-1 focus:ring-primary"
             />
-            <div className="flex gap-2">
-              <button disabled className="text-xs bg-muted border border-border px-3 py-1.5 rounded-lg font-medium text-muted-foreground cursor-not-allowed">
+            <div className="flex gap-1">
+              <button disabled className="text-[10px] uppercase bg-muted border border-border px-3 py-1 rounded-sm font-bold text-muted-foreground cursor-not-allowed">
                 Columns
               </button>
-              <button disabled className="text-xs bg-muted border border-border px-3 py-1.5 rounded-lg font-medium text-muted-foreground cursor-not-allowed">
-                Export CSV
+              <button disabled className="text-[10px] uppercase bg-muted border border-border px-3 py-1 rounded-sm font-bold text-muted-foreground cursor-not-allowed">
+                Export
               </button>
             </div>
           </div>
@@ -156,51 +156,51 @@ export default function DashboardShell() {
           <div className="overflow-x-auto w-full">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-muted/40 border-b border-border text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  <th className="p-4">Asset ID</th>
-                  <th className="p-4">Name</th>
-                  <th className="p-4">Location</th>
-                  <th className="p-4">OEE Rating</th>
-                  <th className="p-4">Throughput</th>
-                  <th className="p-4">State</th>
+                <tr className="bg-muted/40 border-b border-border text-[10px] font-bold text-muted-foreground uppercase tracking-wider">
+                  <th className="p-3 border-r border-border/50">Asset ID</th>
+                  <th className="p-3 border-r border-border/50">Name</th>
+                  <th className="p-3 border-r border-border/50">Location</th>
+                  <th className="p-3 border-r border-border/50">OEE Rating</th>
+                  <th className="p-3 border-r border-border/50">Throughput</th>
+                  <th className="p-3">State</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border/60 text-sm">
+              <tbody className="divide-y divide-border/60 text-xs">
                 {filteredLines.map((line) => (
                   <tr
                     key={line.id}
                     onClick={() => setSelectedLine(line.id === selectedLine?.id ? null : line)}
                     className={cn(
-                      "hover:bg-muted/40 cursor-pointer transition-colors duration-200",
-                      selectedLine?.id === line.id && "bg-primary/5 dark:bg-primary/10 border-l-2 border-l-primary"
+                      "hover:bg-muted/30 cursor-pointer transition-colors duration-100",
+                      selectedLine?.id === line.id && "bg-slate-100 dark:bg-slate-900 border-l-[3px] border-l-primary"
                     )}
                   >
-                    <td className="p-4 font-mono text-xs text-muted-foreground">{line.id}</td>
-                    <td className="p-4 font-semibold">{line.name}</td>
-                    <td className="p-4 text-muted-foreground text-xs">{line.location}</td>
-                    <td className="p-4">
+                    <td className="p-3 font-mono text-[10px] text-muted-foreground border-r border-border/40">{line.id}</td>
+                    <td className="p-3 font-bold border-r border-border/40 text-foreground">{line.name}</td>
+                    <td className="p-3 text-muted-foreground border-r border-border/40">{line.location}</td>
+                    <td className="p-3 border-r border-border/40">
                       <div className="flex items-center gap-2">
-                        <span className="font-mono font-bold w-10 text-right">{line.oee}%</span>
-                        <div className="w-20 bg-muted rounded-full h-1.5 overflow-hidden">
+                        <span className="font-mono font-bold w-8 text-right">{line.oee}%</span>
+                        <div className="w-16 bg-muted rounded-none h-1.5 overflow-hidden border border-border/40">
                           <div
                             className={cn(
-                              "h-full rounded-full",
-                              line.status === "optimal" && "bg-emerald-500",
-                              line.status === "warning" && "bg-amber-500",
-                              line.status === "critical" && "bg-rose-500"
+                              "h-full",
+                              line.status === "optimal" && "bg-emerald-600",
+                              line.status === "warning" && "bg-amber-600",
+                              line.status === "critical" && "bg-destructive"
                             )}
                             style={{ width: `${line.oee}%` }}
                           />
                         </div>
                       </div>
                     </td>
-                    <td className="p-4 font-mono text-xs">{line.throughput} t/hr</td>
-                    <td className="p-4">
+                    <td className="p-3 font-mono border-r border-border/40">{line.throughput} t/hr</td>
+                    <td className="p-3">
                       <span className={cn(
-                        "inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium uppercase tracking-wider text-[10px]",
-                        line.status === "optimal" && "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
-                        line.status === "warning" && "bg-amber-500/10 text-amber-600 dark:text-amber-400",
-                        line.status === "critical" && "bg-rose-500/10 text-rose-600 dark:text-rose-400"
+                        "inline-flex items-center px-1.5 py-0.5 rounded-none text-[9px] font-bold uppercase tracking-wider",
+                        line.status === "optimal" && "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20",
+                        line.status === "warning" && "bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20",
+                        line.status === "critical" && "bg-destructive/10 text-destructive border border-destructive/20"
                       )}>
                         {line.status}
                       </span>
@@ -209,8 +209,8 @@ export default function DashboardShell() {
                 ))}
                 {filteredLines.length === 0 && (
                   <tr>
-                    <td colSpan={6} className="p-8 text-center text-muted-foreground text-sm">
-                      No production lines match your filter criteria.
+                    <td colSpan={6} className="p-8 text-center text-muted-foreground">
+                      No assets found.
                     </td>
                   </tr>
                 )}
@@ -219,110 +219,112 @@ export default function DashboardShell() {
           </div>
 
           {/* Table Pagination */}
-          <div className="p-4 border-t border-border flex items-center justify-between bg-muted/10 text-xs text-muted-foreground">
-            <span>Showing {filteredLines.length} of {mockProductionLines.length} assets</span>
-            <div className="flex items-center gap-1.5">
-              <button disabled className="p-1 rounded border border-border hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed">
-                <ChevronsLeft className="h-3.5 w-3.5" />
+          <div className="p-2 border-t border-border flex items-center justify-between bg-muted/10 text-[10px] text-muted-foreground uppercase font-bold">
+            <span>Total Assets: {mockProductionLines.length}</span>
+            <div className="flex items-center gap-1">
+              <button disabled className="p-1 rounded-sm border border-border hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed">
+                <ChevronsLeft className="h-3 w-3" />
               </button>
-              <button disabled className="p-1 rounded border border-border hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed">
-                <ChevronLeft className="h-3.5 w-3.5" />
+              <button disabled className="p-1 rounded-sm border border-border hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed">
+                <ChevronLeft className="h-3 w-3" />
               </button>
-              <button disabled className="p-1 rounded border border-border hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed">
-                <ChevronRight className="h-3.5 w-3.5" />
+              <button disabled className="p-1 rounded-sm border border-border hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed">
+                <ChevronRight className="h-3 w-3" />
               </button>
-              <button disabled className="p-1 rounded border border-border hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed">
-                <ChevronsRight className="h-3.5 w-3.5" />
+              <button disabled className="p-1 rounded-sm border border-border hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed">
+                <ChevronsRight className="h-3 w-3" />
               </button>
             </div>
           </div>
         </div>
 
-        {/* Side Details/Telemetry Panel (Slides in when line is selected) */}
+        {/* Side Details/Telemetry Panel */}
         <AnimatePresence>
           {selectedLine && (
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 20 }}
-              transition={{ duration: 0.3 }}
-              className="bg-card border border-border rounded-xl shadow-md w-full lg:w-1/3 overflow-hidden shrink-0 flex flex-col"
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 5 }}
+              transition={{ duration: 0.15 }}
+              className="bg-card border border-border rounded-sm shadow-sm w-full lg:w-1/3 overflow-hidden shrink-0 flex flex-col"
             >
               {/* Panel Header */}
-              <div className="p-4 border-b border-border flex items-center justify-between bg-muted/20">
+              <div className="p-3 border-b border-border flex items-center justify-between bg-muted/20">
                 <div className="flex items-center gap-2">
                   <Sliders className="h-4 w-4 text-primary" />
-                  <span className="font-semibold text-sm">Asset Diagnostics</span>
+                  <span className="font-bold text-xs uppercase tracking-wider">Asset Register Diagnostics</span>
                 </div>
                 <button
                   onClick={() => setSelectedLine(null)}
-                  className="text-xs hover:bg-muted px-2 py-1 rounded border border-border text-muted-foreground transition-colors"
+                  className="text-[9px] uppercase font-bold hover:bg-muted px-2 py-1 rounded-sm border border-border text-muted-foreground transition-colors"
                 >
-                  Close
+                  Dismiss
                 </button>
               </div>
 
               {/* Panel Content */}
-              <div className="p-5 space-y-5">
+              <div className="p-4 space-y-4 text-xs">
                 <div>
-                  <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider font-mono">
-                    {selectedLine.id}
+                  <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-wider font-mono">
+                    System Tag: {selectedLine.id}
                   </span>
-                  <h3 className="text-base font-bold leading-tight mt-0.5">{selectedLine.name}</h3>
-                  <span className="text-xs text-muted-foreground">{selectedLine.location}</span>
+                  <h3 className="text-sm font-bold text-foreground mt-0.5 uppercase">{selectedLine.name}</h3>
+                  <span className="text-[10px] text-muted-foreground">{selectedLine.location}</span>
                 </div>
 
                 {/* Status Block */}
                 <div className={cn(
-                  "p-3 rounded-lg border flex gap-3 text-xs",
+                  "p-3 rounded-none border flex gap-3 text-xs",
                   selectedLine.status === "optimal" && "bg-emerald-500/5 border-emerald-500/20 text-emerald-800 dark:text-emerald-300",
                   selectedLine.status === "warning" && "bg-amber-500/5 border-amber-500/20 text-amber-800 dark:text-amber-300",
-                  selectedLine.status === "critical" && "bg-rose-500/5 border-rose-500/20 text-rose-800 dark:text-rose-300"
+                  selectedLine.status === "critical" && "bg-destructive/5 border-destructive/20 text-destructive"
                 )}>
                   <ShieldCheck className="h-4 w-4 shrink-0 mt-0.5" />
                   <div>
-                    <span className="font-bold block uppercase tracking-wide text-[10px]">
-                      Status: {selectedLine.status}
+                    <span className="font-bold block uppercase tracking-wider text-[9px]">
+                      Register Code: {selectedLine.status}
                     </span>
-                    <span>All core vibration, temperature, and torque registers are conforming to standard specifications.</span>
+                    <span className="text-[11px] block mt-0.5 leading-relaxed">
+                      Continuous telemetry conforms to regulatory guidelines. Auto-interlock algorithms active.
+                    </span>
                   </div>
                 </div>
 
-                {/* Telematics/Sensor Grid */}
-                <div className="space-y-3">
-                  <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-wide">
-                    Live Telemetry Registers
+                {/* Sensor Grid */}
+                <div className="space-y-2">
+                  <h4 className="text-[10px] font-bold text-muted-foreground uppercase tracking-wide">
+                    Live PLC Register Sensor Logs
                   </h4>
                   
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-muted/40 border border-border/80 rounded-lg p-3 text-center">
-                      <span className="text-[10px] text-muted-foreground block font-medium">Clinker Temp</span>
-                      <span className="text-lg font-bold font-mono text-foreground mt-0.5 block">
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className="bg-muted/30 border border-border rounded-sm p-2 text-center">
+                      <span className="text-[9px] text-muted-foreground block font-bold uppercase">Kiln Heat</span>
+                      <span className="text-sm font-bold font-mono text-foreground mt-0.5 block">
                         {selectedLine.temp}°C
                       </span>
                     </div>
-                    <div className="bg-muted/40 border border-border/80 rounded-lg p-3 text-center">
-                      <span className="text-[10px] text-muted-foreground block font-medium">Kiln Pressure</span>
-                      <span className="text-lg font-bold font-mono text-foreground mt-0.5 block">
+                    <div className="bg-muted/30 border border-border rounded-sm p-2 text-center">
+                      <span className="text-[9px] text-muted-foreground block font-bold uppercase">Kiln Pressure</span>
+                      <span className="text-sm font-bold font-mono text-foreground mt-0.5 block">
                         {selectedLine.pressure} bar
                       </span>
                     </div>
-                    <div className="bg-muted/40 border border-border/80 rounded-lg p-3 text-center col-span-2">
-                      <span className="text-[10px] text-muted-foreground block font-medium">Kiln Shell Vibration</span>
-                      <span className="text-base font-bold text-foreground mt-0.5 block">
+                    <div className="bg-muted/30 border border-border rounded-sm p-2 text-center col-span-2">
+                      <span className="text-[9px] text-muted-foreground block font-bold uppercase">Bearing Vibration</span>
+                      <span className="text-xs font-bold text-foreground mt-0.5 block uppercase">
                         {selectedLine.vibration}
                       </span>
                     </div>
                   </div>
                 </div>
 
-                {/* Action Controls */}
+                {/* Action Button Set */}
                 <div className="pt-2 border-t border-border flex gap-2">
-                  <button disabled className="flex-1 text-center bg-primary text-primary-foreground hover:bg-primary/90 text-xs py-2 rounded-lg font-medium shadow-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed">
-                    Adjust Feed Rate
+                  <button disabled className="flex-1 text-center bg-primary text-primary-foreground hover:bg-primary/90 text-[10px] uppercase font-bold py-2 rounded-sm shadow-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed">
+                    Adjust Feed
                   </button>
-                  <button disabled className="flex-1 text-center border border-border hover:bg-muted text-xs py-2 rounded-lg font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed">
-                    Trigger Interlock
+                  <button disabled className="flex-1 text-center border border-border hover:bg-muted text-[10px] uppercase font-bold py-2 rounded-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed">
+                    Shutdown kiln
                   </button>
                 </div>
               </div>

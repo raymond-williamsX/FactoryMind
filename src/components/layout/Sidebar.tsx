@@ -37,24 +37,24 @@ export default function Sidebar() {
     <motion.aside
       initial={false}
       animate={{ width: isCollapsed ? 64 : 260 }}
-      transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+      transition={{ duration: 0.2, ease: "easeInOut" }}
       className={cn(
         "flex flex-col h-screen sticky top-0 border-r border-border bg-card text-card-foreground select-none overflow-hidden shrink-0 z-30"
       )}
     >
       {/* Brand Header */}
-      <div className="flex items-center h-16 px-4 border-b border-border justify-between shrink-0">
+      <div className="flex items-center h-14 px-4 border-b border-border justify-between shrink-0 bg-muted/20">
         <div className="flex items-center gap-3 overflow-hidden">
-          <div className="bg-primary text-primary-foreground p-1.5 rounded-lg flex items-center justify-center shrink-0">
-            <Cpu className="h-5 w-5" />
+          <div className="bg-slate-800 dark:bg-slate-700 text-white p-1 rounded-sm flex items-center justify-center shrink-0">
+            <Cpu className="h-4 w-4" />
           </div>
           <AnimatePresence>
             {!isCollapsed && (
               <motion.span
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -10 }}
-                className="font-bold text-sm tracking-tight whitespace-nowrap bg-gradient-to-r from-foreground to-foreground/75 bg-clip-text"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="font-bold text-xs tracking-wider uppercase whitespace-nowrap text-foreground"
               >
                 FactoryMind AI
               </motion.span>
@@ -65,7 +65,7 @@ export default function Sidebar() {
         {!isCollapsed && (
           <button
             onClick={toggleSidebar}
-            className="p-1 rounded-md hover:bg-muted text-muted-foreground transition-colors hidden lg:block"
+            className="p-1 rounded-sm hover:bg-muted text-muted-foreground transition-colors hidden lg:block border border-transparent hover:border-border"
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
@@ -73,27 +73,27 @@ export default function Sidebar() {
       </div>
 
       {/* Navigation List */}
-      <nav className="flex-1 px-3 py-4 space-y-1.5 overflow-y-auto overflow-x-hidden">
+      <nav className="flex-1 py-4 space-y-1 overflow-y-auto overflow-x-hidden">
         {mainNavItems.map((item) => (
           <NavLink
             key={item.path}
             to={item.path}
             className={({ isActive }) =>
               cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all group relative duration-200",
+                "flex items-center gap-3 px-4 py-2.5 text-xs font-semibold transition-all duration-150 border-l-[3px]",
                 isActive
-                  ? "bg-primary text-primary-foreground shadow-sm"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                  ? "bg-slate-100 dark:bg-slate-900 text-foreground border-primary"
+                  : "text-muted-foreground hover:text-foreground hover:bg-slate-100/50 dark:hover:bg-slate-900/50 border-transparent"
               )
             }
           >
-            <item.icon className="h-5 w-5 shrink-0" />
+            <item.icon className="h-4 w-4 shrink-0" />
             <AnimatePresence>
               {!isCollapsed && (
                 <motion.span
-                  initial={{ opacity: 0, width: 0 }}
-                  animate={{ opacity: 1, width: "auto" }}
-                  exit={{ opacity: 0, width: 0 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
                   className="whitespace-nowrap overflow-hidden"
                 >
                   {item.label}
@@ -105,28 +105,28 @@ export default function Sidebar() {
       </nav>
 
       {/* Footer Nav & Platform Status */}
-      <div className="p-3 border-t border-border space-y-3 shrink-0 bg-muted/40">
-        <div className="space-y-1.5">
+      <div className="border-t border-border space-y-3 shrink-0 bg-muted/10 pb-4">
+        <div className="space-y-1 pt-3">
           {bottomNavItems.map((item) => (
             <NavLink
               key={item.path}
               to={item.path}
               className={({ isActive }) =>
                 cn(
-                  "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
+                  "flex items-center gap-3 px-4 py-2.5 text-xs font-semibold transition-all duration-150 border-l-[3px]",
                   isActive
-                    ? "bg-primary text-primary-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    ? "bg-slate-100 dark:bg-slate-900 text-foreground border-primary"
+                    : "text-muted-foreground hover:text-foreground hover:bg-slate-100/50 dark:hover:bg-slate-900/50 border-transparent"
                 )
               }
             >
-              <item.icon className="h-5 w-5 shrink-0" />
+              <item.icon className="h-4 w-4 shrink-0" />
               <AnimatePresence>
                 {!isCollapsed && (
                   <motion.span
-                    initial={{ opacity: 0, width: 0 }}
-                    animate={{ opacity: 1, width: "auto" }}
-                    exit={{ opacity: 0, width: 0 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
                     className="whitespace-nowrap overflow-hidden"
                   >
                     {item.label}
@@ -139,38 +139,42 @@ export default function Sidebar() {
 
         {/* Collapsed Toggle Button for small sidebar */}
         {isCollapsed && (
-          <button
-            onClick={toggleSidebar}
-            className="flex items-center justify-center w-full py-2 hover:bg-muted text-muted-foreground rounded-lg transition-colors"
-          >
-            <ChevronRight className="h-4 w-4" />
-          </button>
+          <div className="px-3">
+            <button
+              onClick={toggleSidebar}
+              className="flex items-center justify-center w-full py-1.5 hover:bg-muted text-muted-foreground border border-border rounded-sm transition-colors"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
         )}
 
         {/* System Health */}
         <AnimatePresence>
           {!isCollapsed && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              className="p-2.5 bg-card border border-border rounded-lg flex flex-col gap-1 text-[11px] text-muted-foreground whitespace-nowrap overflow-hidden"
-            >
-              <div className="flex items-center justify-between">
-                <span className="flex items-center gap-1">
-                  <Database className="h-3 w-3 text-emerald-500" />
-                  Telematics Server
-                </span>
-                <span className="text-emerald-500 font-semibold">ONLINE</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="flex items-center gap-1">
-                  <History className="h-3 w-3" />
-                  Telemetry Delay
-                </span>
-                <span className="font-mono">12ms</span>
-              </div>
-            </motion.div>
+            <div className="px-4">
+              <motion.div
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 5 }}
+                className="p-3 bg-muted/40 border border-border rounded-sm flex flex-col gap-1.5 text-[10px] text-muted-foreground whitespace-nowrap overflow-hidden"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="flex items-center gap-1.5 font-medium">
+                    <Database className="h-3 w-3 text-emerald-600" />
+                    PLC Link
+                  </span>
+                  <span className="text-emerald-600 font-bold">OK</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="flex items-center gap-1.5 font-medium">
+                    <History className="h-3 w-3" />
+                    Response
+                  </span>
+                  <span className="font-mono text-foreground font-semibold">12ms</span>
+                </div>
+              </motion.div>
+            </div>
           )}
         </AnimatePresence>
       </div>
