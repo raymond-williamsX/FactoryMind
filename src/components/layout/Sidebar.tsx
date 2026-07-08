@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard,
@@ -9,10 +9,12 @@ import {
   ChevronRight,
   Cpu,
   Database,
-  History
+  History,
+  X,
 } from "lucide-react";
 import { useSidebar } from "@/context/SidebarContext";
 import { cn } from "@/lib/utils";
+import { useEffect } from "react";
 
 type NavItem = {
   label: string;
@@ -31,8 +33,60 @@ const bottomNavItems: NavItem[] = [
 ];
 
 export default function Sidebar() {
-  const { isCollapsed, toggleSidebar } = useSidebar();
+  const { isCollapsed, toggleSidebar, isMobile, isMobileOpen, setIsMobileOpen } = useSidebar();
+  const location = useLocation();
 
+  // Close mobile drawer on navigation
+  useEffect(() => {
+    if (isMobile) {
+      setIsMobileOpen(false);
+    }
+  }, [location.pathname, isMobile, setIsMobileOpen]);
+
+  // ── MOBILE: Full-width drawer with backdrop overlay ──────────────────────
+  if (isMobile) {
+    return (
+      <>
+        {/* Backdrop */}
+        <AnimatePresence>
+          {isMobileOpen && (
+            <motion.div
+              key="backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
+              onClick={() => setIsMobileOpen(false)}
+            />
+          )}
+        </AnimatePresence>
+
+        {/* Drawer */}
+        <AnimatePresence>
+          {isMobileOpen && (
+            <motion.aside
+              key="mobile-sidebar"
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ duration: 0.25, ease: [0.32, 0.72, 0, 1] }}
+              className="fixed left-0 top-0 h-full w-72 z-50 flex flex-col bg-card text-card-foreground border-r border-border shadow-2xl"
+            >
+              <SidebarContent
+                isCollapsed={false}
+                isMobile={true}
+                onClose={() => setIsMobileOpen(false)}
+                toggleSidebar={toggleSidebar}
+              />
+            </motion.aside>
+          )}
+        </AnimatePresence>
+      </>
+    );
+  }
+
+  // ── DESKTOP: Collapsible icon-rail ───────────────────────────────────────
   return (
     <motion.aside
       initial={false}
@@ -42,6 +96,29 @@ export default function Sidebar() {
         "flex flex-col h-screen sticky top-0 border-r border-border bg-card text-card-foreground select-none overflow-hidden shrink-0 z-30"
       )}
     >
+      <SidebarContent
+        isCollapsed={isCollapsed}
+        isMobile={false}
+        toggleSidebar={toggleSidebar}
+      />
+    </motion.aside>
+  );
+}
+
+// ── Shared sidebar body ────────────────────────────────────────────────────
+function SidebarContent({
+  isCollapsed,
+  isMobile,
+  onClose,
+  toggleSidebar,
+}: {
+  isCollapsed: boolean;
+  isMobile: boolean;
+  onClose?: () => void;
+  toggleSidebar: () => void;
+}) {
+  return (
+    <>
       {/* Brand Header */}
       <div className="flex items-center h-14 px-4 border-b border-border justify-between shrink-0 bg-muted/20">
         <div className="flex items-center gap-3 overflow-hidden">
@@ -62,13 +139,24 @@ export default function Sidebar() {
           </AnimatePresence>
         </div>
 
-        {!isCollapsed && (
+        {/* Close button: X on mobile, ChevronLeft on desktop expanded */}
+        {isMobile ? (
           <button
-            onClick={toggleSidebar}
-            className="p-1 rounded-sm hover:bg-muted text-muted-foreground transition-colors hidden lg:block border border-transparent hover:border-border"
+            onClick={onClose}
+            className="p-1 rounded-sm hover:bg-muted text-muted-foreground transition-colors border border-transparent hover:border-border"
+            aria-label="Close navigation"
           >
-            <ChevronLeft className="h-4 w-4" />
+            <X className="h-4 w-4" />
           </button>
+        ) : (
+          !isCollapsed && (
+            <button
+              onClick={toggleSidebar}
+              className="p-1 rounded-sm hover:bg-muted text-muted-foreground transition-colors hidden lg:block border border-transparent hover:border-border"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+          )
         )}
       </div>
 
@@ -137,8 +225,8 @@ export default function Sidebar() {
           ))}
         </div>
 
-        {/* Collapsed Toggle Button for small sidebar */}
-        {isCollapsed && (
+        {/* Collapsed Toggle Button for small sidebar (desktop only) */}
+        {!isMobile && isCollapsed && (
           <div className="px-3">
             <button
               onClick={toggleSidebar}
@@ -178,6 +266,6 @@ export default function Sidebar() {
           )}
         </AnimatePresence>
       </div>
-    </motion.aside>
+    </>
   );
 }

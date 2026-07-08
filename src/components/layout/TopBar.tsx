@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 export default function TopBar() {
   const { theme, toggleTheme } = useTheme();
-  const { isCollapsed, toggleSidebar } = useSidebar();
+  const { isCollapsed, toggleSidebar, isMobile } = useSidebar();
   const location = useLocation();
 
   const getBreadcrumbs = () => {
@@ -21,30 +21,37 @@ export default function TopBar() {
   const breadcrumbs = getBreadcrumbs();
 
   return (
-    <header className="h-14 border-b border-border bg-card text-card-foreground flex items-center justify-between px-4 sticky top-0 z-20 select-none">
+    <header className="h-14 border-b border-border bg-card text-card-foreground flex items-center justify-between px-3 sm:px-4 sticky top-0 z-20 select-none">
       {/* Left Side: Hamburger & Breadcrumbs */}
-      <div className="flex items-center gap-3">
-        <button
-          onClick={toggleSidebar}
-          className="p-1 rounded-sm hover:bg-muted text-muted-foreground transition-colors lg:hidden border border-transparent hover:border-border"
-        >
-          <Menu className="h-4.5 w-4.5" />
-        </button>
-
-        {isCollapsed && (
+      <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+        {/* Mobile hamburger — always visible on mobile */}
+        {isMobile && (
           <button
             onClick={toggleSidebar}
-            className="p-1 rounded-sm hover:bg-muted text-muted-foreground transition-colors hidden lg:block border border-transparent hover:border-border"
+            className="p-1.5 rounded-sm hover:bg-muted text-muted-foreground transition-colors border border-transparent hover:border-border shrink-0"
+            aria-label="Open navigation"
           >
-            <Menu className="h-4.5 w-4.5" />
+            <Menu className="h-4 w-4" />
           </button>
         )}
 
-        <div className="flex items-center gap-2 text-xs text-muted-foreground font-semibold uppercase tracking-wider">
+        {/* Desktop collapsed hamburger */}
+        {!isMobile && isCollapsed && (
+          <button
+            onClick={toggleSidebar}
+            className="p-1 rounded-sm hover:bg-muted text-muted-foreground transition-colors border border-transparent hover:border-border shrink-0"
+            aria-label="Expand sidebar"
+          >
+            <Menu className="h-4 w-4" />
+          </button>
+        )}
+
+        {/* Breadcrumbs */}
+        <div className="flex items-center gap-1.5 sm:gap-2 text-xs text-muted-foreground font-semibold uppercase tracking-wider min-w-0 overflow-hidden">
           {breadcrumbs.map((crumb, idx) => (
-            <div key={crumb} className="flex items-center gap-1.5">
+            <div key={crumb} className={cn("flex items-center gap-1.5 shrink-0", idx === 0 && "hidden sm:flex")}>
               {idx > 0 && <span className="text-muted-foreground/35">/</span>}
-              <span className={cn(idx === breadcrumbs.length - 1 && "text-foreground")}>
+              <span className={cn(idx === breadcrumbs.length - 1 && "text-foreground truncate")}>
                 {crumb}
               </span>
             </div>
@@ -52,8 +59,8 @@ export default function TopBar() {
         </div>
       </div>
 
-      {/* Middle: Clinical OEE Badging */}
-      <div className="hidden md:flex items-center gap-4 text-[10px] uppercase font-semibold border-x border-border/80 px-4 h-6">
+      {/* Middle: Clinical OEE Badging (hidden on mobile) */}
+      <div className="hidden md:flex items-center gap-4 text-[10px] uppercase font-semibold border-x border-border/80 px-4 h-6 shrink-0">
         <div className="flex items-center gap-1.5">
           <CheckCircle className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
           <div>
@@ -71,8 +78,8 @@ export default function TopBar() {
       </div>
 
       {/* Right Side: Search, Theme, Profile */}
-      <div className="flex items-center gap-2">
-        {/* Search */}
+      <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        {/* Search — only on xl+ */}
         <div className="relative hidden xl:block w-48">
           <Search className="absolute left-2 top-2 h-3 w-3 text-muted-foreground" />
           <input
@@ -99,7 +106,7 @@ export default function TopBar() {
         </button>
 
         {/* User profile */}
-        <div className="flex items-center gap-2 border-l border-border pl-3 ml-1 h-6">
+        <div className="flex items-center gap-2 border-l border-border pl-2 sm:pl-3 ml-0.5 sm:ml-1 h-6">
           <div className="h-6 w-6 rounded-sm bg-primary/10 border border-primary/20 text-primary flex items-center justify-center font-bold text-[10px] shrink-0 dark:bg-primary/20">
             <User className="h-3.5 w-3.5" />
           </div>

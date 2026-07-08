@@ -4,32 +4,48 @@ type SidebarContextType = {
   isCollapsed: boolean;
   setIsCollapsed: (collapsed: boolean) => void;
   toggleSidebar: () => void;
+  isMobileOpen: boolean;
+  setIsMobileOpen: (open: boolean) => void;
+  toggleMobileSidebar: () => void;
+  isMobile: boolean;
 };
 
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
 
 export function SidebarProvider({ children }: { children: React.ReactNode }) {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
+  const [isMobileOpen, setIsMobileOpen] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
-  // Auto collapse on screen widths below 1024px (lg breakpoint)
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 1024) {
-        setIsCollapsed(true);
+      const mobile = window.innerWidth < 1024;
+      setIsMobile(mobile);
+      if (!mobile) {
+        // On desktop: restore normal collapsed state, close mobile drawer
+        setIsMobileOpen(false);
+        setIsCollapsed(window.innerWidth < 1280);
       } else {
-        setIsCollapsed(false);
+        // On mobile: always fully hidden by default (drawer pattern)
+        setIsMobileOpen(false);
       }
     };
 
-    // Run on initial mount
     handleResize();
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const toggleSidebar = () => {
-    setIsCollapsed((prev) => !prev);
+    if (isMobile) {
+      setIsMobileOpen((prev) => !prev);
+    } else {
+      setIsCollapsed((prev) => !prev);
+    }
+  };
+
+  const toggleMobileSidebar = () => {
+    setIsMobileOpen((prev) => !prev);
   };
 
   return (
@@ -38,6 +54,10 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
         isCollapsed,
         setIsCollapsed,
         toggleSidebar,
+        isMobileOpen,
+        setIsMobileOpen,
+        toggleMobileSidebar,
+        isMobile,
       }}
     >
       {children}
