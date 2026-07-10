@@ -147,62 +147,79 @@ ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.user_plant_assignments ENABLE ROW LEVEL SECURITY;
 
 -- 4.1 Organizations Policies
+DROP POLICY IF EXISTS select_organizations_auth ON public.organizations;
 CREATE POLICY select_organizations_auth ON public.organizations
     FOR SELECT TO authenticated USING (true);
 
+DROP POLICY IF EXISTS manage_organizations_admin ON public.organizations;
 CREATE POLICY manage_organizations_admin ON public.organizations
     FOR ALL TO authenticated USING (public.is_super_admin(auth.uid()));
 
 -- 4.2 Regions Policies
+DROP POLICY IF EXISTS select_regions_auth ON public.regions;
 CREATE POLICY select_regions_auth ON public.regions
     FOR SELECT TO authenticated USING (true);
 
+DROP POLICY IF EXISTS manage_regions_admin ON public.regions;
 CREATE POLICY manage_regions_admin ON public.regions
     FOR ALL TO authenticated USING (public.is_super_admin(auth.uid()));
 
 -- 4.3 Plants Policies
+DROP POLICY IF EXISTS select_plants_auth ON public.plants;
 CREATE POLICY select_plants_auth ON public.plants
     FOR SELECT TO authenticated USING (true);
 
+DROP POLICY IF EXISTS manage_plants_admin ON public.plants;
 CREATE POLICY manage_plants_admin ON public.plants
     FOR ALL TO authenticated USING (public.is_super_admin(auth.uid()) OR public.has_permission(auth.uid(), 'manage:plants'));
 
 -- 4.4 Departments Policies
+DROP POLICY IF EXISTS select_departments_auth ON public.departments;
 CREATE POLICY select_departments_auth ON public.departments
     FOR SELECT TO authenticated USING (true);
 
+DROP POLICY IF EXISTS manage_departments_admin ON public.departments;
 CREATE POLICY manage_departments_admin ON public.departments
     FOR ALL TO authenticated USING (public.is_super_admin(auth.uid()) OR public.has_permission(auth.uid(), 'manage:plants'));
 
 -- 4.5 User Roles Policies
+DROP POLICY IF EXISTS select_user_roles_auth ON public.user_roles;
 CREATE POLICY select_user_roles_auth ON public.user_roles
     FOR SELECT TO authenticated USING (true);
 
+DROP POLICY IF EXISTS manage_user_roles_admin ON public.user_roles;
 CREATE POLICY manage_user_roles_admin ON public.user_roles
     FOR ALL TO authenticated USING (public.is_super_admin(auth.uid()));
 
 -- 4.6 Role Permissions Policies
+DROP POLICY IF EXISTS select_role_permissions_auth ON public.role_permissions;
 CREATE POLICY select_role_permissions_auth ON public.role_permissions
     FOR SELECT TO authenticated USING (true);
 
+DROP POLICY IF EXISTS manage_role_permissions_admin ON public.role_permissions;
 CREATE POLICY manage_role_permissions_admin ON public.role_permissions
     FOR ALL TO authenticated USING (public.is_super_admin(auth.uid()));
 
 -- 4.7 Profiles Policies
+DROP POLICY IF EXISTS select_profiles_auth ON public.profiles;
 CREATE POLICY select_profiles_auth ON public.profiles
     FOR SELECT TO authenticated USING (true);
 
+DROP POLICY IF EXISTS update_profiles_self ON public.profiles;
 CREATE POLICY update_profiles_self ON public.profiles
     FOR UPDATE TO authenticated USING (auth.uid() = id)
     WITH CHECK (auth.uid() = id);
 
+DROP POLICY IF EXISTS manage_profiles_admin ON public.profiles;
 CREATE POLICY manage_profiles_admin ON public.profiles
     FOR ALL TO authenticated USING (public.is_super_admin(auth.uid()) OR public.has_permission(auth.uid(), 'manage:users'));
 
 -- 4.8 User Plant Assignments Policies
+DROP POLICY IF EXISTS select_plant_assignments_auth ON public.user_plant_assignments;
 CREATE POLICY select_plant_assignments_auth ON public.user_plant_assignments
     FOR SELECT TO authenticated USING (true);
 
+DROP POLICY IF EXISTS manage_plant_assignments_admin ON public.user_plant_assignments;
 CREATE POLICY manage_plant_assignments_admin ON public.user_plant_assignments
     FOR ALL TO authenticated USING (public.is_super_admin(auth.uid()) OR public.has_permission(auth.uid(), 'manage:users'));
 
